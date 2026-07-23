@@ -157,7 +157,7 @@ export const projects: Project[] = [
     id: 'labor-market',
     order: 2,
     year: '2026',
-    image: '/projects/labor-market-v3.png',
+    image: '/projects/labor-market-v4.png',
     title: { en: 'Saudi Labor Market Analysis', ar: 'تحليل سوق العمل السعودي' },
     description: {
       en: 'Analyzed 1,470 job listings from Jadarat (the Saudi national job portal) with Python for cleaning and EDA, and built an interactive Power BI dashboard uncovering salary trends by region, sector, and experience level.',
@@ -171,7 +171,7 @@ export const projects: Project[] = [
     id: 'storelytics',
     order: 10,
     year: '2025',
-    image: '/projects/storelytics-v3.png',
+    image: '/projects/storelytics-v4.png',
     title: { en: 'Storelytics', ar: 'ستوريلتكس' },
     description: {
       en: 'A personal analytics project exploring retail sales data to surface actionable business insights through data pipelines and visualization.',
@@ -185,7 +185,7 @@ export const projects: Project[] = [
     id: 'content-recommender',
     order: 11,
     year: '2025',
-    image: '/projects/content-recommender-v3.png',
+    image: '/projects/content-recommender-v4.png',
     title: { en: 'Content Recommender', ar: 'محرّك التوصية بالمحتوى' },
     description: {
       en: 'A content-based recommendation engine that matches items to user profiles using similarity modeling — a personal exploration of recommender-system fundamentals.',
@@ -199,7 +199,7 @@ export const projects: Project[] = [
     id: 'rag-chatbot',
     order: 9,
     year: '2025',
-    image: '/projects/rag-chatbot-v3.png',
+    image: '/projects/rag-chatbot-v4.png',
     title: { en: 'RAG Chatbot & Sentiment Analysis', ar: 'روبوت محادثة RAG وتحليل المشاعر' },
     description: {
       en: 'A customer-feedback assistant combining Retrieval-Augmented Generation with sentiment analysis to turn unstructured feedback into structured insight. Built as a task during the Solutions by STC co-op.',
@@ -214,7 +214,7 @@ export const projects: Project[] = [
     id: 'hr-dashboard',
     order: 12,
     year: '2025',
-    image: '/projects/hr-dashboard-v3.png',
+    image: '/projects/hr-dashboard-v4.png',
     title: { en: 'HR Analytics Dashboard', ar: 'لوحة تحليلات الموارد البشرية' },
     description: {
       en: 'A workforce analytics dashboard in Python and SQL with dynamic segmentation for headcount and performance analysis. Built as a task during the Solutions by STC co-op.',
@@ -229,7 +229,7 @@ export const projects: Project[] = [
     id: 'smartlist',
     order: 7,
     year: '2025',
-    image: '/projects/smartlist-v3.png',
+    image: '/projects/smartlist-v4.png',
     title: { en: 'SmartList', ar: 'سمارت ليست' },
     description: {
       en: 'An AI task and goal-management tool built with Streamlit and Google Gemini AI during the SDAIA bootcamp.',
@@ -244,7 +244,7 @@ export const projects: Project[] = [
     id: 'loan-eligibility',
     order: 8,
     year: '2024',
-    image: '/projects/loan-eligibility-v3.png',
+    image: '/projects/loan-eligibility-v4.png',
     title: { en: 'Loan Eligibility Classification', ar: 'تصنيف الأهلية للقروض' },
     description: {
       en: 'Applied classification models (Logistic Regression, Decision Tree) to the Loan Prediction dataset, identifying credit history as the strongest predictive feature.',
@@ -261,7 +261,7 @@ export const confidentialProjects: Project[] = [
     id: 'stc-kpi-dashboard',
     order: 3,
     year: '2026',
-    image: '/projects/stc-kpi-dashboard-v3.png',
+    image: '/projects/stc-kpi-dashboard-v4.png',
     title: { en: 'Executive KPI Dashboard', ar: 'لوحة مؤشرات الأداء التنفيذية' },
     description: {
       en: 'An interactive Power BI dashboard visualizing department-level KPIs for senior leadership, enabling real-time strategic decisions.',
@@ -280,7 +280,7 @@ export const confidentialProjects: Project[] = [
     id: 'stc-doc-ai',
     order: 4,
     year: '2025',
-    image: '/projects/stc-doc-ai-v3.png',
+    image: '/projects/stc-doc-ai-v4.png',
     title: { en: 'AI Document Processing System', ar: 'نظام معالجة المستندات بالذكاء الاصطناعي' },
     description: {
       en: 'A production-level system combining LLMs and OCR to automate document extraction, reducing manual effort by roughly 70%.',
@@ -299,7 +299,7 @@ export const confidentialProjects: Project[] = [
     id: 'stc-mom',
     order: 5,
     year: '2025',
-    image: '/projects/stc-mom-v3.png',
+    image: '/projects/stc-mom-v4.png',
     title: { en: 'Automated Minutes-of-Meeting', ar: 'أتمتة محاضر الاجتماعات' },
     description: {
       en: 'An end-to-end pipeline using Whisper speech-to-text and LLMs to auto-generate meeting minutes, cutting documentation time significantly.',
@@ -318,7 +318,7 @@ export const confidentialProjects: Project[] = [
     id: 'kacst-cv',
     order: 6,
     year: '2025',
-    image: '/projects/kacst-cv-v3.png',
+    image: '/projects/kacst-cv-v4.png',
     title: { en: 'Classified Computer Vision Project', ar: 'مشروع رؤية حاسوبية مصنّف' },
     description: {
       en: 'Image preprocessing workflows and PyTorch computer-vision model training for a classified national research initiative.',
