@@ -80,7 +80,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="rounded-2xl border border-ink-900/10 dark:border-paper-100/10 bg-paper-100/50 dark:bg-ink-900/50 p-6 flex items-start gap-4 mt-4"
           >
-            <div className="p-2.5 rounded-xl bg-teal-500/15 text-teal-600 dark:text-teal-400">
+            <div className="p-2.5 rounded-xl bg-gold-500/15 text-gold-600 dark:text-gold-400">
               <BrainCircuit size={20} />
             </div>
             <div>
