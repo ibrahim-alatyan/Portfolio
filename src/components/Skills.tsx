@@ -185,18 +185,21 @@ function GraphView({ active, onSelect, t }: any) {
         ))}
 
         {layout.map((c) =>
-          c.items.map((p) => (
-            <line
-              key={c.cat.key + p.item.name}
-              x1={c.x}
-              y1={c.y}
-              x2={p.x}
-              y2={p.y}
-              stroke="currentColor"
-              className="text-ink-900/[0.14] dark:text-paper-100/[0.14]"
-              strokeWidth={1}
-            />
-          ))
+          c.items.map((p) => {
+            const isLinkActive = active?.name === p.item.name;
+            return (
+              <line
+                key={c.cat.key + p.item.name}
+                x1={c.x}
+                y1={c.y}
+                x2={p.x}
+                y2={p.y}
+                stroke={isLinkActive ? '#D4A72C' : 'currentColor'}
+                className={isLinkActive ? '' : 'text-ink-900/[0.14] dark:text-paper-100/[0.14]'}
+                strokeWidth={isLinkActive ? 2 : 1}
+              />
+            );
+          })
         )}
 
         {layout.map((c) => (
@@ -227,6 +230,9 @@ function GraphView({ active, onSelect, t }: any) {
                 onClick={() => onSelect(isActive ? null : p.item)}
               >
                 <g transform={`translate(${p.x},${p.y})`}>
+                  {isActive && (
+                    <circle r={24} fill="none" stroke="#D4A72C" strokeWidth={1.4} opacity={0.5} />
+                  )}
                   <circle
                     r={18}
                     className={

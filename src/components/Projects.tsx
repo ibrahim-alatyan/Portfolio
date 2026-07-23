@@ -113,7 +113,7 @@ function ProjectCard({ project, lang, t, onOpen }: { project: Project; lang: 'en
           <img
             src={asset(project.image)}
             alt={t(project.title)}
-            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
           <ImageOff size={26} className="text-ink-900/20 dark:text-paper-100/20" />
@@ -172,7 +172,7 @@ function ProjectModal({ project, lang, t, onClose }: { project: Project; lang: '
       >
         <div className="relative aspect-[16/9] bg-ink-900/5 dark:bg-paper-100/5 flex items-center justify-center">
           {project.image ? (
-            <img src={asset(project.image)} alt={t(project.title)} className="w-full h-full object-cover object-top" />
+            <img src={asset(project.image)} alt={t(project.title)} className="w-full h-full object-contain" />
           ) : (
             <ImageOff size={32} className="text-ink-900/20 dark:text-paper-100/20" />
           )}
