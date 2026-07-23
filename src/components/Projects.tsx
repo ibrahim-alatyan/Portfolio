@@ -137,7 +137,7 @@ function ProjectCard({ project, lang, t, onOpen }: { project: Project; lang: 'en
           <p className="text-[11px] font-medium text-gold-600 dark:text-gold-400 mb-1">{t(project.org)}</p>
         )}
         <h3 className="font-display font-semibold text-base mb-2">{t(project.title)}</h3>
-        <p className="text-sm text-ink-800/75 dark:text-paper-200/70 leading-relaxed mb-4 flex-1 line-clamp-3">
+        <p className="text-[13px] text-ink-800/75 dark:text-paper-200/70 leading-relaxed mb-4 flex-1 line-clamp-2">
           {t(project.description)}
         </p>
         <div className="mb-4">

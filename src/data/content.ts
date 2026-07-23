@@ -133,6 +133,7 @@ export const projects: Project[] = [
     tags: ['Web Platform', 'Hackathon', 'UX'],
     category: 'hackathon',
     demo: 'https://unievent-hub.com',
+    github: 'https://github.com/abdullrahman011/university-event-hub',
     image: '/projects/unieventhub.jpg',
     org: { en: 'Hackathon "Al-Tahawwul" — KSU', ar: 'هاكاثون "التحوّل" — جامعة الملك سعود' },
   },
@@ -263,7 +264,7 @@ export const confidentialProjects: Project[] = [
   {
     id: 'stc-mom',
     year: '2025',
-    title: { en: 'Automated Minutes-of-Meeting Pipeline', ar: 'خط أتمتة محاضر الاجتماعات' },
+    title: { en: 'Automated Minutes-of-Meeting', ar: 'أتمتة محاضر الاجتماعات' },
     description: {
       en: 'An end-to-end pipeline using Whisper speech-to-text and LLMs to auto-generate meeting minutes, cutting documentation time significantly.',
       ar: 'خط معالجة متكامل يستخدم Whisper وتحويل الصوت إلى نص ونماذج اللغة الكبيرة لتوليد محاضر الاجتماعات تلقائيًا.',
@@ -280,7 +281,7 @@ export const confidentialProjects: Project[] = [
   {
     id: 'kacst-cv',
     year: '2025',
-    title: { en: 'Classified Computer Vision Research', ar: 'بحث رؤية حاسوبية مصنّف' },
+    title: { en: 'Classified Computer Vision Project', ar: 'مشروع رؤية حاسوبية مصنّف' },
     description: {
       en: 'Image preprocessing workflows and PyTorch computer-vision model training for a classified national research initiative.',
       ar: 'خطوات معالجة أولية للصور وتدريب نماذج رؤية حاسوبية بواسطة PyTorch ضمن مبادرة بحثية وطنية مصنّفة.',

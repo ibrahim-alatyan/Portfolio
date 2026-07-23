@@ -9,7 +9,7 @@ type ViewMode = 'list' | 'graph';
 
 export default function Skills() {
   const { lang, t } = useSite();
-  const [view, setView] = useState<ViewMode>('list');
+  const [view, setView] = useState<ViewMode>('graph');
   const [active, setActive] = useState<SkillItem | null>(null);
 
   return (
@@ -134,32 +134,56 @@ function ListView({ active, onSelect, t }: any) {
 
 function GraphView({ active, onSelect, t }: any) {
   const layout = useMemo(() => {
-    const cx = 500;
-    const cy = 300;
-    const catRadius = 230;
+    const cx = 600;
+    const cy = 460;
+    const catRadius = 300;
     const n = skillCategories.length;
     return skillCategories.map((cat, i) => {
       const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
       const catX = cx + Math.cos(angle) * catRadius;
-      const catY = cy + Math.sin(angle) * catRadius * 0.72;
-      const itemRadius = 62;
-      const spread = Math.min(cat.items.length * 0.42, Math.PI * 0.9);
+      const catY = cy + Math.sin(angle) * catRadius * 0.82;
+      const baseRadius = 92;
+      const spread = Math.min(cat.items.length * 0.52, Math.PI * 1.15);
       const items = cat.items.map((item, j) => {
         const t2 = cat.items.length > 1 ? j / (cat.items.length - 1) - 0.5 : 0;
         const a = angle + t2 * spread;
+        const tierRadius = baseRadius + (j % 2 === 0 ? 0 : 46);
         return {
           item,
-          x: catX + Math.cos(a) * itemRadius,
-          y: catY + Math.sin(a) * itemRadius * 0.9,
+          x: catX + Math.cos(a) * tierRadius,
+          y: catY + Math.sin(a) * tierRadius * 0.92,
         };
       });
       return { cat, x: catX, y: catY, items };
     });
   }, []);
 
+  const crossLinks = useMemo(() => {
+    const n = layout.length;
+    const links: [number, number][] = [];
+    for (let i = 0; i < n; i++) {
+      links.push([i, (i + 2) % n]);
+      links.push([i, (i + 3) % n]);
+    }
+    return links;
+  }, [layout]);
+
   return (
     <div className="rounded-2xl border border-ink-900/10 dark:border-paper-100/10 bg-paper-100/30 dark:bg-ink-900/30 overflow-hidden">
-      <svg viewBox="0 0 1000 620" className="w-full h-auto select-none">
+      <svg viewBox="0 0 1200 920" className="w-full h-auto select-none">
+        {crossLinks.map(([a, b], i) => (
+          <line
+            key={`cross-${i}`}
+            x1={layout[a].x}
+            y1={layout[a].y}
+            x2={layout[b].x}
+            y2={layout[b].y}
+            stroke="currentColor"
+            className="text-ink-900/[0.06] dark:text-paper-100/[0.08]"
+            strokeWidth={1}
+          />
+        ))}
+
         {layout.map((c) =>
           c.items.map((p) => (
             <line
@@ -169,7 +193,7 @@ function GraphView({ active, onSelect, t }: any) {
               x2={p.x}
               y2={p.y}
               stroke="currentColor"
-              className="text-ink-900/10 dark:text-paper-100/10"
+              className="text-ink-900/[0.14] dark:text-paper-100/[0.14]"
               strokeWidth={1}
             />
           ))
@@ -177,46 +201,53 @@ function GraphView({ active, onSelect, t }: any) {
 
         {layout.map((c) => (
           <g key={c.cat.key}>
-            <circle cx={c.x} cy={c.y} r={5} className="fill-gold-500" />
+            <circle cx={c.x} cy={c.y} r={6} className="fill-gold-500" />
             <text
               x={c.x}
-              y={c.y - 14}
+              y={c.y - 16}
               textAnchor="middle"
               className="fill-ink-900 dark:fill-paper-100 font-display"
-              style={{ fontSize: 11, fontWeight: 600 }}
+              style={{ fontSize: 12, fontWeight: 600 }}
             >
               {t(c.cat.title)}
             </text>
           </g>
         ))}
 
-        {layout.map((c) =>
-          c.items.map((p) => {
+        {layout.map((c, ci) =>
+          c.items.map((p, pi) => {
             const isActive = active?.name === p.item.name;
+            const Icon = p.item.icon;
+            const delay = ((ci * 7 + pi * 3) % 10) * 0.3;
             return (
               <g
                 key={p.item.name}
-                transform={`translate(${p.x},${p.y})`}
+                className="skill-node cursor-pointer"
+                style={{ animationDelay: `${delay}s` }}
                 onClick={() => onSelect(isActive ? null : p.item)}
-                className="cursor-pointer"
               >
-                <circle
-                  r={16}
-                  className={
-                    isActive
-                      ? 'fill-gold-500 stroke-gold-500'
-                      : 'fill-paper-50 dark:fill-ink-800 stroke-ink-900/15 dark:stroke-paper-100/20'
-                  }
-                  strokeWidth={1}
-                />
-                <text
-                  y={30}
-                  textAnchor="middle"
-                  className="fill-ink-800 dark:fill-paper-200"
-                  style={{ fontSize: 9.5 }}
-                >
-                  {p.item.name.length > 14 ? p.item.name.slice(0, 13) + '…' : p.item.name}
-                </text>
+                <g transform={`translate(${p.x},${p.y})`}>
+                  <circle
+                    r={18}
+                    className={
+                      isActive
+                        ? 'fill-gold-500 stroke-gold-500'
+                        : 'fill-paper-50 dark:fill-ink-800 stroke-ink-900/15 dark:stroke-paper-100/20'
+                    }
+                    strokeWidth={1}
+                  />
+                  <g transform="translate(-9,-9)">
+                    <Icon size={18} className={isActive ? 'text-ink-950' : 'text-ink-800 dark:text-paper-200'} />
+                  </g>
+                  <text
+                    y={34}
+                    textAnchor="middle"
+                    className="fill-ink-800 dark:fill-paper-200"
+                    style={{ fontSize: 10 }}
+                  >
+                    {p.item.name.length > 15 ? p.item.name.slice(0, 14) + '…' : p.item.name}
+                  </text>
+                </g>
               </g>
             );
           })

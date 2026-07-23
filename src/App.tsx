@@ -1,5 +1,6 @@
 import { SiteProvider } from './context/SiteContext';
 import Navbar from './components/Navbar';
+import SideNav from './components/SideNav';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
@@ -13,6 +14,7 @@ export default function App() {
   return (
     <SiteProvider>
       <Navbar />
+      <SideNav />
       <main>
         <Hero />
         <About />
