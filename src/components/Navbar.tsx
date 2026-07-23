@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Moon, Sun, Languages, Menu, X, Download } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { profile } from '../data/content';
+import { asset } from '../lib/asset';
 
 const sections = [
   { id: 'about', en: 'About', ar: 'نبذة' },
@@ -51,7 +52,7 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-2">
           <a
-            href={profile.resume}
+            href={asset(profile.resume)}
             download
             className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full border border-gold-600/40 text-gold-600 dark:text-gold-400 hover:bg-gold-500/10 transition-colors focus-ring"
           >
@@ -95,7 +96,7 @@ export default function Navbar() {
             ))}
           </ul>
           <div className="flex items-center gap-3">
-            <a href={profile.resume} download className="text-sm px-3 py-1.5 rounded-full border border-gold-600/40 text-gold-600 dark:text-gold-400">
+            <a href={asset(profile.resume)} download className="text-sm px-3 py-1.5 rounded-full border border-gold-600/40 text-gold-600 dark:text-gold-400">
               {lang === 'ar' ? 'السيرة الذاتية' : 'Resume'}
             </a>
             <button onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')} className="p-2 rounded-full">

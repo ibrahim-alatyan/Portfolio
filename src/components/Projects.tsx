@@ -5,6 +5,7 @@ import { useSite } from '../context/SiteContext';
 import { projects, confidentialProjects } from '../data/content';
 import type { Project } from '../data/content';
 import { GithubIcon } from './BrandIcons';
+import { asset } from '../lib/asset';
 
 const filters = [
   { key: 'all', en: 'All', ar: 'الكل' },
@@ -89,7 +90,7 @@ function ProjectCard({ project, lang, t }: { project: Project; lang: 'en' | 'ar'
       <div className="relative aspect-[16/10] bg-ink-900/5 dark:bg-paper-100/5 flex items-center justify-center overflow-hidden">
         {project.image ? (
           <img
-            src={project.image}
+            src={asset(project.image)}
             alt={t(project.title)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />

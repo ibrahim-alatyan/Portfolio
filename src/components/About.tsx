@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useSite } from '../context/SiteContext';
 import { profile, education } from '../data/content';
+import { asset } from '../lib/asset';
 import { GraduationCap } from 'lucide-react';
 
 export default function About() {
@@ -18,7 +19,7 @@ export default function About() {
         >
           <div className="absolute -inset-3 rounded-2xl border border-gold-500/30 rotate-2" />
           <div className="relative rounded-2xl overflow-hidden border border-ink-900/10 dark:border-paper-100/10 shadow-xl">
-            <img src={profile.portrait} alt={t(profile.name)} className="w-full h-full object-cover aspect-[4/5]" />
+            <img src={asset(profile.portrait)} alt={t(profile.name)} className="w-full h-full object-cover aspect-[4/5]" />
           </div>
           <div className="absolute -bottom-4 -right-4 bg-ink-950 dark:bg-gold-500 text-paper-50 dark:text-ink-950 rounded-xl px-4 py-2 text-xs font-display font-medium shadow-lg">
             AI · ML · BI

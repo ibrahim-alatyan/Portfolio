@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Award, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { certificates } from '../data/content';
+import { asset } from '../lib/asset';
 
 export default function Certificates() {
   const { lang, t } = useSite();
@@ -55,7 +56,7 @@ export default function Certificates() {
             >
               {cert.image ? (
                 <div className="aspect-[4/3] overflow-hidden bg-ink-900/5">
-                  <img src={cert.image} alt={t(cert.title)} className="w-full h-full object-cover" />
+                  <img src={asset(cert.image!)} alt={t(cert.title)} className="w-full h-full object-cover" />
                 </div>
               ) : (
                 <div className="aspect-[4/3] flex items-center justify-center bg-ink-900/5 dark:bg-paper-100/5">
@@ -97,7 +98,7 @@ export default function Certificates() {
               key={lightboxIdx}
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              src={withImages[lightboxIdx].image}
+              src={asset(withImages[lightboxIdx].image!)}
               alt={t(withImages[lightboxIdx].title)}
               onClick={(e) => e.stopPropagation()}
               className="max-h-[85vh] max-w-[90vw] rounded-lg shadow-2xl object-contain"
