@@ -1,7 +1,7 @@
 export type Lang = 'en' | 'ar';
 
 export const profile = {
-  name: { en: 'Ibrahim Al-Atyan', ar: 'إبراهيم بن سامي عتيان' },
+  name: { en: 'Ibrahim Al-Atyan', ar: 'ابراهيم بن عتيان' },
   roles: {
     en: ['AI Engineer', 'Data Scientist', 'Data Analyst', 'ML Engineer', 'BI Developer'],
     ar: ['مهندس ذكاء اصطناعي', 'عالم بيانات', 'محلل بيانات', 'مهندس تعلم آلي', 'مطوّر أنظمة أعمال ذكية'],
@@ -14,8 +14,8 @@ export const profile = {
   resume: '/resume.pdf',
   portrait: '/profile/portrait.jpg',
   summary: {
-    en: 'AI & Data Science graduate with hands-on production experience building end-to-end AI systems, automated data pipelines, and analytical dashboards. Expertise in Machine Learning, NLP, Deep Learning, and Computer Vision, developed through industry co-ops at Solutions by STC and KACST. Skilled at turning complex data into strategic insight using Python, SQL, Power BI, and modern ML frameworks.',
-    ar: 'خريج ذكاء اصطناعي وعلوم بيانات مع خبرة عملية فعلية في بناء أنظمة ذكاء اصطناعي متكاملة، وخطوط بيانات آلية، ولوحات تحليلية. لدي خبرة في التعلم الآلي، معالجة اللغة الطبيعية، التعلم العميق، والرؤية الحاسوبية، اكتسبتها من خلال برامج تعاون مع "حلول من إس تي سي" و"مدينة الملك عبدالعزيز للعلوم والتقنية". أجيد تحويل البيانات المعقّدة إلى رؤى استراتيجية باستخدام Python وSQL وPower BI وأطر التعلم الآلي الحديثة.',
+    en: 'AI & Data Science graduate with hands-on production experience building end-to-end AI systems, automated data pipelines, and analytical dashboards. Expertise in Machine Learning, NLP, Deep Learning, and Computer Vision, developed through industry co-ops at Solutions by STC and KACST, and the SDAIA AI bootcamp. Skilled at turning complex data into strategic insight using Python, SQL, Power BI, and modern ML frameworks.',
+    ar: 'خريج ذكاء اصطناعي وعلوم بيانات مع خبرة عملية فعلية في بناء أنظمة ذكاء اصطناعي متكاملة، وخطوط بيانات آلية، ولوحات تحليلية. لدي خبرة في التعلم الآلي، معالجة اللغة الطبيعية، التعلم العميق، والرؤية الحاسوبية، اكتسبتها من خلال برامج تعاون مع "حلول من إس تي سي" و"مدينة الملك عبدالعزيز للعلوم والتقنية"، ومعسكر سدايا التدريبي للذكاء الاصطناعي. أجيد تحويل البيانات المعقّدة إلى رؤى استراتيجية باستخدام Python وSQL وPower BI وأطر التعلم الآلي الحديثة.',
   },
 };
 
@@ -30,6 +30,19 @@ export const education = {
     ar: 'التقدير: جيد جدًا — الترتيب التاسع على الدفعة',
   },
   period: '07/2020 – 01/2026',
+};
+
+export const bootcamp = {
+  degree: {
+    en: 'AI Application Building Bootcamp in Python',
+    ar: 'معسكر بناء تطبيقات الذكاء الاصطناعي بلغة بايثون',
+  },
+  school: { en: 'SDAIA', ar: 'سدايا' },
+  detail: {
+    en: 'Hands-on training in applied AI and Python-based ML apps',
+    ar: 'تدريب عملي على تطبيقات الذكاء الاصطناعي وتطبيقات التعلم الآلي بلغة بايثون',
+  },
+  period: '01/2025',
 };
 
 export interface ExperienceItem {

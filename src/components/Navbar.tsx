@@ -34,7 +34,7 @@ export default function Navbar() {
     >
       <nav className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
         <a href="#top" className="font-display font-semibold tracking-tight text-lg focus-ring rounded">
-          {lang === 'ar' ? 'إبراهيم عتيان' : 'Ibrahim Al-Atyan'}
+          {lang === 'ar' ? 'ابراهيم بن عتيان' : 'Ibrahim Al-Atyan'}
         </a>
 
         <ul className="hidden md:flex items-center gap-7 text-sm">

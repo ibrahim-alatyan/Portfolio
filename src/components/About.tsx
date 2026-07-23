@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { useSite } from '../context/SiteContext';
-import { profile, education } from '../data/content';
+import { profile, education, bootcamp } from '../data/content';
 import { asset } from '../lib/asset';
-import { GraduationCap } from 'lucide-react';
+import { GraduationCap, Sparkles } from 'lucide-react';
 
 export default function About() {
   const { lang, t } = useSite();
@@ -70,6 +70,24 @@ export default function About() {
               <p className="text-sm text-ink-700/70 dark:text-paper-300/70 mt-1">{t(education.school)}</p>
               <p className="text-sm text-ink-700/70 dark:text-paper-300/70">{t(education.detail)}</p>
               <p className="text-xs text-ink-600/60 dark:text-paper-400/60 mt-1">{education.period}</p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="rounded-2xl border border-ink-900/10 dark:border-paper-100/10 bg-paper-100/50 dark:bg-ink-900/50 p-6 flex items-start gap-4 mt-4"
+          >
+            <div className="p-2.5 rounded-xl bg-teal-500/15 text-teal-600 dark:text-teal-400">
+              <Sparkles size={20} />
+            </div>
+            <div>
+              <p className="font-display font-medium">{t(bootcamp.degree)}</p>
+              <p className="text-sm text-ink-700/70 dark:text-paper-300/70 mt-1">{t(bootcamp.school)}</p>
+              <p className="text-sm text-ink-700/70 dark:text-paper-300/70">{t(bootcamp.detail)}</p>
+              <p className="text-xs text-ink-600/60 dark:text-paper-400/60 mt-1">{bootcamp.period}</p>
             </div>
           </motion.div>
         </div>
