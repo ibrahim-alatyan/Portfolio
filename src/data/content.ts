@@ -91,7 +91,7 @@ export const experience: ExperienceItem[] = [
   },
 ];
 
-export type ProjectCategory = 'personal' | 'ksu' | 'hackathon' | 'bootcamp' | 'stc-task';
+export type ProjectCategory = 'personal' | 'ksu' | 'hackathon' | 'bootcamp' | 'stc-task' | 'kacst';
 
 export interface Project {
   id: string;
@@ -259,7 +259,7 @@ export const confidentialProjects: Project[] = [
       ar: 'خطوات معالجة أولية للصور وتدريب نماذج رؤية حاسوبية بواسطة PyTorch ضمن مبادرة بحثية وطنية مصنّفة.',
     },
     tags: ['PyTorch', 'Computer Vision'],
-    category: 'personal',
+    category: 'kacst',
     confidential: true,
     org: { en: 'KACST', ar: 'مدينة الملك عبدالعزيز للعلوم والتقنية' },
   },
@@ -302,23 +302,21 @@ export interface Certificate {
   date: string;
   image?: string;
   credentialId?: string;
+  featured?: boolean;
 }
 
 export const certificates: Certificate[] = [
-  { title: { en: 'Bachelor Degree — Applied Information Systems', ar: 'شهادة البكالوريوس — نظم المعلومات التطبيقية' }, issuer: { en: 'King Saud University', ar: 'جامعة الملك سعود' }, date: '01/2026', image: '/certificates/Graduation_Certificate.jpg' },
-  { title: { en: 'Certified Data Management Professional (Associate)', ar: 'أخصائي إدارة بيانات معتمد (مساعد)' }, issuer: { en: 'DAMA International', ar: 'DAMA الدولية' }, date: '01/2026', image: '/certificates/CDMP_Certificate.jpg', credentialId: '18108008' },
+  { title: { en: 'Certified Data Management Professional (Associate)', ar: 'أخصائي إدارة بيانات معتمد (مساعد)' }, issuer: { en: 'DAMA International', ar: 'DAMA الدولية' }, date: '01/2026', image: '/certificates/CDMP_Certificate.jpg', credentialId: '18108008', featured: true },
+  { title: { en: 'Building Transformer-Based NLP Applications', ar: 'بناء تطبيقات معالجة اللغة الطبيعية القائمة على المحوّلات' }, issuer: { en: 'NVIDIA', ar: 'إنفيديا' }, date: '03/2026', image: '/certificates/NLP_NVIDIA.jpg', credentialId: 'WKYURJ_PSaq7N_LWHKTxOA', featured: true },
+  { title: { en: 'Data Science Professional', ar: 'أخصائي علوم البيانات' }, issuer: { en: 'IBM', ar: 'آي بي إم' }, date: '02/2025', image: '/certificates/IBM_Data_Science_Professional_Certificate.jpg', featured: true },
+  { title: { en: 'AI Application Building Bootcamp in Python', ar: 'معسكر بناء تطبيقات الذكاء الاصطناعي بلغة بايثون' }, issuer: { en: 'SDAIA', ar: 'سدايا' }, date: '01/2025', image: '/certificates/Ai_application_building_bootcamp_in_python_certificate.jpg', featured: true },
   { title: { en: 'Advanced Agentic AI Systems Engineering', ar: 'هندسة أنظمة الذكاء الاصطناعي التوكيلي المتقدمة' }, issuer: { en: 'SDAIA', ar: 'سدايا' }, date: '07/2026', image: '/certificates/Agentic_AI_certificate.jpg' },
-  { title: { en: 'Building Transformer-Based NLP Applications', ar: 'بناء تطبيقات معالجة اللغة الطبيعية القائمة على المحوّلات' }, issuer: { en: 'NVIDIA', ar: 'إنفيديا' }, date: '03/2026', image: '/certificates/NLP_NVIDIA.jpg', credentialId: 'WKYURJ_PSaq7N_LWHKTxOA' },
   { title: { en: 'Building NLP Applications', ar: 'بناء تطبيقات معالجة اللغة الطبيعية' }, issuer: { en: 'Tuwaiq Academy', ar: 'أكاديمية طويق' }, date: '03/2026', image: '/certificates/Tuwaiq_NLP_Cetificate.jpg' },
   { title: { en: 'Advanced Internet of Things (IoT)', ar: 'إنترنت الأشياء المتقدم' }, issuer: { en: 'Tuwaiq Academy', ar: 'أكاديمية طويق' }, date: '01/2026', image: '/certificates/Advanced_Internet_of_Things__IoT_.jpg' },
-  { title: { en: 'Data Science Professional', ar: 'أخصائي علوم البيانات' }, issuer: { en: 'IBM', ar: 'آي بي إم' }, date: '02/2025', image: '/certificates/IBM_Data_Science_Professional_Certificate.jpg' },
   { title: { en: 'Applied Data Science', ar: 'علوم البيانات التطبيقية' }, issuer: { en: 'IBM', ar: 'آي بي إم' }, date: '02/2025', image: '/certificates/Applied_Data_Science_Certificate.jpg' },
   { title: { en: 'AI Foundations for Business', ar: 'أساسيات الذكاء الاصطناعي للأعمال' }, issuer: { en: 'IBM', ar: 'آي بي إم' }, date: '03/2025', image: '/certificates/AI_Foundations_for_Business_Certificate.jpg' },
-  { title: { en: 'AI Application Building Bootcamp in Python', ar: 'معسكر بناء تطبيقات الذكاء الاصطناعي بلغة بايثون' }, issuer: { en: 'SDAIA', ar: 'سدايا' }, date: '01/2025', image: '/certificates/Ai_application_building_bootcamp_in_python_certificate.jpg' },
   { title: { en: 'Fundamentals of Microcontroller Programming (Arduino)', ar: 'أساسيات برمجة المتحكمات الدقيقة (أردوينو)' }, issuer: { en: 'Tuwaiq Academy', ar: 'أكاديمية طويق' }, date: '07/2025', image: '/certificates/Ardunio_Tuwaiq.jpg' },
-  { title: { en: 'COOP Program — Technology Division', ar: 'برنامج التعاون — قسم التقنية' }, issuer: { en: 'Solutions by STC (AFAQ)', ar: 'حلول من إس تي سي (آفاق)' }, date: '02/2026', image: '/certificates/Solutions_by_STC_Training_Certificate.jpg' },
   { title: { en: 'Virtual Work Experience — Data Analytics', ar: 'تجربة عمل افتراضية — تحليل البيانات' }, issuer: { en: 'Misk Skills × STC', ar: 'مسك المهارات × إس تي سي' }, date: '03/2025', image: '/certificates/STC_MISK_DA.jpg' },
-  { title: { en: 'Cooperative Training Program', ar: 'برنامج التدريب التعاوني' }, issuer: { en: 'KACST', ar: 'مدينة الملك عبدالعزيز للعلوم والتقنية' }, date: '08/2025', image: '/certificates/KACST_COOP_CERTIFICATE.jpg' },
   { title: { en: 'Design Thinking in Business: Building Promising Ventures', ar: 'التفكير التصميمي في الأعمال: بناء مشاريع واعدة' }, issuer: { en: 'Tuwaiq Academy', ar: 'أكاديمية طويق' }, date: '08/2025' },
   { title: { en: 'Data Science Foundations', ar: 'أساسيات علوم البيانات' }, issuer: { en: 'IBM', ar: 'آي بي إم' }, date: '07/2024' },
   { title: { en: 'Data Fundamentals', ar: 'أساسيات البيانات' }, issuer: { en: 'IBM', ar: 'آي بي إم' }, date: '05/2024' },

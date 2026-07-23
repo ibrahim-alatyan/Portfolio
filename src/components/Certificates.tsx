@@ -1,19 +1,29 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Award, X, ChevronLeft, ChevronRight, Star, ExternalLink } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { certificates } from '../data/content';
 import { asset } from '../lib/asset';
+
+function dateScore(d: string) {
+  const [m, y] = d.split('/').map(Number);
+  return y * 100 + m;
+}
 
 export default function Certificates() {
   const { lang, t } = useSite();
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
 
-  const withImages = certificates.filter((c) => c.image);
-  const imageIndexMap = withImages.map((c) => certificates.indexOf(c));
+  const sorted = useMemo(() => {
+    const featured = certificates.filter((c) => c.featured).sort((a, b) => dateScore(b.date) - dateScore(a.date));
+    const rest = certificates.filter((c) => !c.featured).sort((a, b) => dateScore(b.date) - dateScore(a.date));
+    return [...featured, ...rest];
+  }, []);
 
-  const openLightbox = (certIdx: number) => {
-    const pos = imageIndexMap.indexOf(certIdx);
+  const withImages = sorted.filter((c) => c.image);
+
+  const openLightbox = (cert: (typeof sorted)[number]) => {
+    const pos = withImages.findIndex((c) => c === cert);
     if (pos !== -1) setLightboxIdx(pos);
   };
 
@@ -42,34 +52,38 @@ export default function Certificates() {
         </motion.h2>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {certificates.map((cert, idx) => (
+          {sorted.map((cert, idx) => (
             <motion.button
               key={idx}
-              onClick={() => cert.image && openLightbox(idx)}
+              onClick={() => cert.image && openLightbox(cert)}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: (idx % 6) * 0.04 }}
-              className={`text-start rounded-2xl border border-ink-900/10 dark:border-paper-100/10 bg-paper-100/40 dark:bg-ink-900/40 overflow-hidden transition-colors focus-ring ${
-                cert.image ? 'hover:border-gold-500/40 cursor-pointer' : 'cursor-default'
-              }`}
+              className={`relative text-start rounded-2xl border p-5 flex items-start gap-4 transition-colors focus-ring ${
+                cert.featured
+                  ? 'border-gold-500/50 bg-gradient-to-br from-gold-500/[0.08] to-transparent dark:from-gold-500/[0.1]'
+                  : 'border-ink-900/10 dark:border-paper-100/10 bg-paper-100/40 dark:bg-ink-900/40'
+              } ${cert.image ? 'hover:border-gold-500/50 cursor-pointer' : 'cursor-default'}`}
             >
-              {cert.image ? (
-                <div className="aspect-[4/3] overflow-hidden bg-ink-900/5">
-                  <img src={asset(cert.image!)} alt={t(cert.title)} className="w-full h-full object-cover" />
-                </div>
-              ) : (
-                <div className="aspect-[4/3] flex items-center justify-center bg-ink-900/5 dark:bg-paper-100/5">
-                  <div className="flex flex-col items-center gap-2 text-ink-600/40 dark:text-paper-400/40">
-                    <Award size={28} />
-                    <span className="text-[11px]">{t(cert.issuer)}</span>
-                  </div>
-                </div>
+              {cert.featured && (
+                <span className="absolute -top-2.5 -end-2.5 flex items-center justify-center w-7 h-7 rounded-full bg-gold-500 text-ink-950 shadow-md">
+                  <Star size={13} fill="currentColor" />
+                </span>
               )}
-              <div className="p-4">
+              <div className="shrink-0 w-11 h-11 rounded-xl bg-ink-900/5 dark:bg-paper-100/10 flex items-center justify-center text-gold-600 dark:text-gold-400">
+                <Award size={20} />
+              </div>
+              <div className="min-w-0">
                 <p className="font-medium text-sm leading-snug mb-1">{t(cert.title)}</p>
                 <p className="text-xs text-teal-600 dark:text-teal-400">{t(cert.issuer)}</p>
-                <p className="text-[11px] text-ink-600/50 dark:text-paper-400/50 mt-1">{cert.date}</p>
+                <p className="text-[11px] text-ink-600/70 dark:text-paper-400/80 mt-1">{cert.date}</p>
+                {cert.image && (
+                  <p className="text-[11px] text-gold-600 dark:text-gold-400 mt-2 inline-flex items-center gap-1">
+                    <ExternalLink size={11} />
+                    {lang === 'ar' ? 'اضغط للتفاصيل' : 'Click for details'}
+                  </p>
+                )}
               </div>
             </motion.button>
           ))}

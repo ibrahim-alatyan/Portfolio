@@ -13,8 +13,8 @@ const filters = [
   { key: 'ksu', en: 'University', ar: 'جامعي' },
   { key: 'hackathon', en: 'Hackathon', ar: 'هاكاثون' },
   { key: 'bootcamp', en: 'Bootcamp', ar: 'معسكر' },
-  { key: 'stc-task', en: 'STC Task', ar: 'مهمة STC' },
-  { key: 'confidential', en: 'Confidential', ar: 'سري' },
+  { key: 'stc-task', en: 'Solutions by STC', ar: 'حلول من إس تي سي' },
+  { key: 'kacst', en: 'KACST', ar: 'كاكست' },
 ] as const;
 
 export default function Projects() {
@@ -25,8 +25,7 @@ export default function Projects() {
 
   const filtered = useMemo(() => {
     if (active === 'all') return allProjects;
-    if (active === 'confidential') return allProjects.filter((p) => p.confidential);
-    return allProjects.filter((p) => p.category === active && !p.confidential);
+    return allProjects.filter((p) => p.category === active);
   }, [active]);
 
   return (
