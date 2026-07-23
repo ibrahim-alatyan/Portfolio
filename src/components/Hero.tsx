@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
-import { ArrowDownRight, MapPin } from 'lucide-react';
+import { ArrowDownRight, MapPin, Mail } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { profile } from '../data/content';
 import ParticleField from './ParticleField';
+import { GithubIcon, LinkedinIcon } from './BrandIcons';
 
 export default function Hero() {
   const { lang, t } = useSite();
@@ -77,6 +78,30 @@ export default function Hero() {
           >
             {lang === 'ar' ? 'تواصل معي' : "Let's Connect"}
           </a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.56 }}
+          className="mt-6 flex items-center gap-3"
+        >
+          {[
+            { icon: GithubIcon, href: profile.github, label: 'GitHub' },
+            { icon: LinkedinIcon, href: profile.linkedin, label: 'LinkedIn' },
+            { icon: Mail, href: `mailto:${profile.email}`, label: 'Email' },
+          ].map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target={s.href.startsWith('http') ? '_blank' : undefined}
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-ink-900/15 dark:border-paper-100/15 text-ink-700 dark:text-paper-200 hover:border-gold-500/50 hover:text-gold-600 dark:hover:text-gold-400 transition-colors focus-ring"
+            >
+              <s.icon size={16} />
+            </a>
+          ))}
         </motion.div>
       </div>
     </section>

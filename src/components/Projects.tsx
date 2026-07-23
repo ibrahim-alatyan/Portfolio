@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Lock, ImageOff } from 'lucide-react';
+import { Lock, ImageOff, X, FolderGit2 } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { projects, confidentialProjects } from '../data/content';
 import type { Project } from '../data/content';
@@ -20,6 +20,7 @@ const filters = [
 export default function Projects() {
   const { lang, t } = useSite();
   const [active, setActive] = useState<string>('all');
+  const [selected, setSelected] = useState<Project | null>(null);
 
   const allProjects: Project[] = [...projects, ...confidentialProjects];
 
@@ -56,7 +57,7 @@ export default function Projects() {
               className={`text-xs sm:text-sm px-4 py-2 rounded-full border transition-colors focus-ring ${
                 active === f.key
                   ? 'bg-ink-950 text-paper-50 dark:bg-gold-500 dark:text-ink-950 border-transparent'
-                  : 'border-ink-900/15 dark:border-paper-100/15 text-ink-700/70 dark:text-paper-300/70 hover:border-gold-500/50'
+                  : 'border-ink-900/15 dark:border-paper-100/15 text-ink-700/80 dark:text-paper-300/80 hover:border-gold-500/50'
               }`}
             >
               {lang === 'ar' ? f.ar : f.en}
@@ -67,16 +68,37 @@ export default function Projects() {
         <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
             {filtered.map((p) => (
-              <ProjectCard key={p.id} project={p} lang={lang} t={t} />
+              <ProjectCard key={p.id} project={p} lang={lang} t={t} onOpen={() => setSelected(p)} />
             ))}
           </AnimatePresence>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {selected && (
+          <ProjectModal project={selected} lang={lang} t={t} onClose={() => setSelected(null)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
 
-function ProjectCard({ project, lang, t }: { project: Project; lang: 'en' | 'ar'; t: any }) {
+function TechBadges({ tags }: { tags: string[] }) {
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {tags.map((tag) => (
+        <span
+          key={tag}
+          className="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg border border-ink-900/10 dark:border-paper-100/15 bg-paper-50/60 dark:bg-ink-950/40 text-ink-700/80 dark:text-paper-300/80"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function ProjectCard({ project, lang, t, onOpen }: { project: Project; lang: 'en' | 'ar'; t: any; onOpen: () => void }) {
   return (
     <motion.article
       layout
@@ -105,48 +127,119 @@ function ProjectCard({ project, lang, t }: { project: Project; lang: 'en' | 'ar'
       </div>
 
       <div className="p-5 flex flex-col flex-1">
+        <div className="flex items-center justify-between gap-2 mb-1.5">
+          <p className="text-[10.5px] font-display font-medium tracking-[0.15em] uppercase text-teal-600 dark:text-teal-400">
+            {project.tags.slice(0, 3).join(' · ')}
+          </p>
+          {project.year && <span className="text-[11px] text-ink-600/60 dark:text-paper-400/70 shrink-0">{project.year}</span>}
+        </div>
         {project.org && (
-          <p className="text-[11px] font-medium text-teal-600 dark:text-teal-400 mb-1">{t(project.org)}</p>
+          <p className="text-[11px] font-medium text-gold-600 dark:text-gold-400 mb-1">{t(project.org)}</p>
         )}
         <h3 className="font-display font-semibold text-base mb-2">{t(project.title)}</h3>
-        <p className="text-sm text-ink-800/75 dark:text-paper-200/70 leading-relaxed mb-4 flex-1">
+        <p className="text-sm text-ink-800/75 dark:text-paper-200/70 leading-relaxed mb-4 flex-1 line-clamp-3">
           {t(project.description)}
         </p>
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {project.tags.map((tag) => (
-            <span key={tag} className="text-[11px] px-2 py-0.5 rounded-md bg-ink-900/5 dark:bg-paper-100/10 text-ink-700/70 dark:text-paper-300/70">
-              {tag}
-            </span>
-          ))}
+        <div className="mb-4">
+          <TechBadges tags={project.tags} />
         </div>
-        <div className="flex items-center gap-3 pt-1 border-t border-ink-900/10 dark:border-paper-100/10 mt-auto pt-3">
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-medium hover:text-gold-600 dark:hover:text-gold-400 transition-colors focus-ring rounded"
-            >
-              <GithubIcon size={14} /> {lang === 'ar' ? 'الكود' : 'Code'}
-            </a>
-          )}
-          {project.demo && (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-medium hover:text-gold-600 dark:hover:text-gold-400 transition-colors focus-ring rounded"
-            >
-              <ExternalLink size={14} /> {lang === 'ar' ? 'المعاينة' : 'Live Demo'}
-            </a>
-          )}
-          {!project.github && !project.demo && (
-            <span className="text-xs text-ink-600/50 dark:text-paper-400/50">
-              {lang === 'ar' ? 'غير متاح للنشر العام' : 'Not publicly available'}
-            </span>
-          )}
-        </div>
+        <button
+          onClick={onOpen}
+          className="text-xs font-medium text-gold-600 dark:text-gold-400 hover:underline text-start pt-3 border-t border-ink-900/10 dark:border-paper-100/10 mt-auto focus-ring rounded"
+        >
+          {lang === 'ar' ? 'اضغط للتفاصيل' : 'Click for details'}
+        </button>
       </div>
     </motion.article>
+  );
+}
+
+function ProjectModal({ project, lang, t, onClose }: { project: Project; lang: 'en' | 'ar'; t: any; onClose: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] bg-ink-950/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 16, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 10, scale: 0.98 }}
+        onClick={(e) => e.stopPropagation()}
+        className="w-full max-w-lg max-h-[88vh] overflow-y-auto rounded-2xl bg-paper-50 dark:bg-ink-900 border border-ink-900/10 dark:border-paper-100/10 shadow-2xl"
+      >
+        <div className="relative aspect-[16/9] bg-ink-900/5 dark:bg-paper-100/5 flex items-center justify-center">
+          {project.image ? (
+            <img src={asset(project.image)} alt={t(project.title)} className="w-full h-full object-cover" />
+          ) : (
+            <ImageOff size={32} className="text-ink-900/20 dark:text-paper-100/20" />
+          )}
+          <button
+            onClick={onClose}
+            className="absolute top-3 end-3 w-8 h-8 flex items-center justify-center rounded-full bg-ink-950/70 text-paper-50 hover:bg-ink-950/90 focus-ring"
+            aria-label="Close"
+          >
+            <X size={16} />
+          </button>
+        </div>
+
+        <div className="p-6">
+          <div className="flex items-center justify-between gap-2 mb-1.5">
+            <p className="text-[10.5px] font-display font-medium tracking-[0.15em] uppercase text-teal-600 dark:text-teal-400">
+              {project.tags.slice(0, 3).join(' · ')}
+            </p>
+            {project.year && <span className="text-xs text-ink-600/60 dark:text-paper-400/70">{project.year}</span>}
+          </div>
+          <h3 className="font-display font-semibold text-xl mb-3">{t(project.title)}</h3>
+
+          {project.confidential ? (
+            <div className="flex items-start gap-2 rounded-xl border border-ink-900/10 dark:border-paper-100/10 bg-paper-100/60 dark:bg-ink-950/40 px-3.5 py-2.5 mb-4">
+              <Lock size={14} className="text-gold-600 dark:text-gold-400 mt-0.5 shrink-0" />
+              <div>
+                <p className="text-xs font-medium">
+                  {project.org ? t(project.org) : ''} · {lang === 'ar' ? 'سري' : 'Confidential'}
+                </p>
+                {project.confidentialNote && (
+                  <p className="text-[11px] text-ink-700/70 dark:text-paper-300/70 mt-0.5">{t(project.confidentialNote)}</p>
+                )}
+              </div>
+            </div>
+          ) : (
+            project.org && <p className="text-xs font-medium text-gold-600 dark:text-gold-400 mb-4">{t(project.org)}</p>
+          )}
+
+          <p className="text-sm leading-relaxed text-ink-800/80 dark:text-paper-200/75 mb-5">{t(project.description)}</p>
+
+          <div className="mb-6">
+            <TechBadges tags={project.tags} />
+          </div>
+
+          <div className="flex flex-wrap gap-3 pt-4 border-t border-ink-900/10 dark:border-paper-100/10">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-ink-950 text-paper-50 dark:bg-gold-500 dark:text-ink-950 text-sm font-medium hover:opacity-90 transition-opacity focus-ring"
+              >
+                <GithubIcon size={15} /> {lang === 'ar' ? 'عرض المستودع' : 'View Repository'}
+              </a>
+            )}
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-ink-900/15 dark:border-paper-100/15 text-sm font-medium hover:border-gold-500/50 transition-colors focus-ring"
+              >
+                <FolderGit2 size={15} /> {lang === 'ar' ? 'المعاينة' : 'Live Demo'}
+              </a>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }

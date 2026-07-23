@@ -26,7 +26,7 @@ export const education = {
   },
   school: { en: 'King Saud University', ar: 'جامعة الملك سعود' },
   detail: {
-    en: 'Grade: Very Good — 9th in class · GPA out of 5',
+    en: 'Grade: Very Good — 9th in class',
     ar: 'التقدير: جيد جدًا — الترتيب التاسع على الدفعة',
   },
   period: '07/2020 – 01/2026',
@@ -57,7 +57,7 @@ export const experience: ExperienceItem[] = [
     role: { en: 'AI & Data Co-op', ar: 'متعاون ذكاء اصطناعي وبيانات' },
     org: { en: 'Solutions by STC', ar: 'حلول من إس تي سي' },
     dept: { en: 'AI, Data & Emerging Tech Department', ar: 'إدارة الذكاء الاصطناعي والبيانات والتقنيات الناشئة' },
-    period: '08/2025 – 02/2026',
+    period: '08/2025 – 01/2026',
     bullets: [
       {
         en: 'Architected a production-level AI document processing system using LLMs and OCR, reducing manual extraction effort by ~70%.',
@@ -104,11 +104,14 @@ export interface Project {
   image?: string;
   confidential?: boolean;
   org?: { en: string; ar: string };
+  year?: string;
+  confidentialNote?: { en: string; ar: string };
 }
 
 export const projects: Project[] = [
   {
     id: 'ai-recruitment',
+    year: '2025',
     title: { en: 'AI-Powered Recruitment System', ar: 'نظام توظيف مدعوم بالذكاء الاصطناعي' },
     description: {
       en: 'Full-stack AI recruitment system with automated resume parsing, semantic candidate–role matching, and ML-based scoring. Used transformer-based NLP for skill extraction, achieving strong matching accuracy across diverse job profiles. Graduation project, King Saud University.',
@@ -121,6 +124,7 @@ export const projects: Project[] = [
   },
   {
     id: 'unieventhub',
+    year: '2025',
     title: { en: 'UniEventHub', ar: 'ملتقى الفعاليات الجامعية' },
     description: {
       en: 'A central platform for discovering, organizing, and registering for campus events, built during the "Al-Tahawwul" hackathon at KSU.',
@@ -134,6 +138,7 @@ export const projects: Project[] = [
   },
   {
     id: 'labor-market',
+    year: '2026',
     title: { en: 'Saudi Labor Market Analysis', ar: 'تحليل سوق العمل السعودي' },
     description: {
       en: 'Analyzed 1,470 job listings from Jadarat (the Saudi national job portal) with Python for cleaning and EDA, and built an interactive Power BI dashboard uncovering salary trends by region, sector, and experience level.',
@@ -145,6 +150,7 @@ export const projects: Project[] = [
   },
   {
     id: 'storelytics',
+    year: '2025',
     title: { en: 'Storelytics', ar: 'ستوريلتكس' },
     description: {
       en: 'A personal analytics project exploring retail sales data to surface actionable business insights through data pipelines and visualization.',
@@ -156,6 +162,7 @@ export const projects: Project[] = [
   },
   {
     id: 'content-recommender',
+    year: '2025',
     title: { en: 'Content Recommender', ar: 'محرّك التوصية بالمحتوى' },
     description: {
       en: 'A content-based recommendation engine that matches items to user profiles using similarity modeling — a personal exploration of recommender-system fundamentals.',
@@ -167,6 +174,7 @@ export const projects: Project[] = [
   },
   {
     id: 'rag-chatbot',
+    year: '2025',
     title: { en: 'RAG Chatbot & Sentiment Analysis', ar: 'روبوت محادثة RAG وتحليل المشاعر' },
     description: {
       en: 'A customer-feedback assistant combining Retrieval-Augmented Generation with sentiment analysis to turn unstructured feedback into structured insight. Built as a task during the Solutions by STC co-op.',
@@ -179,6 +187,7 @@ export const projects: Project[] = [
   },
   {
     id: 'hr-dashboard',
+    year: '2025',
     title: { en: 'HR Analytics Dashboard', ar: 'لوحة تحليلات الموارد البشرية' },
     description: {
       en: 'A workforce analytics dashboard in Python and SQL with dynamic segmentation for headcount and performance analysis. Built as a task during the Solutions by STC co-op.',
@@ -191,6 +200,7 @@ export const projects: Project[] = [
   },
   {
     id: 'smartlist',
+    year: '2025',
     title: { en: 'SmartList', ar: 'سمارت ليست' },
     description: {
       en: 'An AI task and goal-management tool built with Streamlit and Google Gemini AI during the SDAIA bootcamp.',
@@ -203,6 +213,7 @@ export const projects: Project[] = [
   },
   {
     id: 'loan-eligibility',
+    year: '2024',
     title: { en: 'Loan Eligibility Classification', ar: 'تصنيف الأهلية للقروض' },
     description: {
       en: 'Applied classification models (Logistic Regression, Decision Tree) to the Loan Prediction dataset, identifying credit history as the strongest predictive feature.',
@@ -217,6 +228,7 @@ export const projects: Project[] = [
 export const confidentialProjects: Project[] = [
   {
     id: 'stc-kpi-dashboard',
+    year: '2026',
     title: { en: 'Executive KPI Dashboard', ar: 'لوحة مؤشرات الأداء التنفيذية' },
     description: {
       en: 'An interactive Power BI dashboard visualizing department-level KPIs for senior leadership, enabling real-time strategic decisions.',
@@ -226,9 +238,14 @@ export const confidentialProjects: Project[] = [
     category: 'stc-task',
     confidential: true,
     org: { en: 'Solutions by STC', ar: 'حلول من إس تي سي' },
+    confidentialNote: {
+      en: 'Screenshot for illustration only. Full dashboard is internal to Solutions by STC.',
+      ar: 'الصورة للتوضيح فقط. اللوحة الكاملة داخلية لدى حلول من إس تي سي.',
+    },
   },
   {
     id: 'stc-doc-ai',
+    year: '2025',
     title: { en: 'AI Document Processing System', ar: 'نظام معالجة المستندات بالذكاء الاصطناعي' },
     description: {
       en: 'A production-level system combining LLMs and OCR to automate document extraction, reducing manual effort by roughly 70%.',
@@ -238,9 +255,14 @@ export const confidentialProjects: Project[] = [
     category: 'stc-task',
     confidential: true,
     org: { en: 'Solutions by STC', ar: 'حلول من إس تي سي' },
+    confidentialNote: {
+      en: 'System is internal to Solutions by STC — architecture described at a high level only.',
+      ar: 'النظام داخلي لدى حلول من إس تي سي — الوصف هنا عام فقط.',
+    },
   },
   {
     id: 'stc-mom',
+    year: '2025',
     title: { en: 'Automated Minutes-of-Meeting Pipeline', ar: 'خط أتمتة محاضر الاجتماعات' },
     description: {
       en: 'An end-to-end pipeline using Whisper speech-to-text and LLMs to auto-generate meeting minutes, cutting documentation time significantly.',
@@ -250,9 +272,14 @@ export const confidentialProjects: Project[] = [
     category: 'stc-task',
     confidential: true,
     org: { en: 'Solutions by STC', ar: 'حلول من إس تي سي' },
+    confidentialNote: {
+      en: 'Pipeline is deployed internally at Solutions by STC — not publicly available.',
+      ar: 'الخط منشور داخليًا لدى حلول من إس تي سي — غير متاح للعموم.',
+    },
   },
   {
     id: 'kacst-cv',
+    year: '2025',
     title: { en: 'Classified Computer Vision Research', ar: 'بحث رؤية حاسوبية مصنّف' },
     description: {
       en: 'Image preprocessing workflows and PyTorch computer-vision model training for a classified national research initiative.',
@@ -262,6 +289,10 @@ export const confidentialProjects: Project[] = [
     category: 'kacst',
     confidential: true,
     org: { en: 'KACST', ar: 'مدينة الملك عبدالعزيز للعلوم والتقنية' },
+    confidentialNote: {
+      en: 'Early-stage overview only. Full system and data are internal to KACST.',
+      ar: 'نظرة عامة أولية فقط. النظام والبيانات كاملة داخلية لدى KACST.',
+    },
   },
 ];
 
@@ -317,7 +348,7 @@ export const certificates: Certificate[] = [
   { title: { en: 'AI Foundations for Business', ar: 'أساسيات الذكاء الاصطناعي للأعمال' }, issuer: { en: 'IBM', ar: 'آي بي إم' }, date: '03/2025', image: '/certificates/AI_Foundations_for_Business_Certificate.jpg' },
   { title: { en: 'Fundamentals of Microcontroller Programming (Arduino)', ar: 'أساسيات برمجة المتحكمات الدقيقة (أردوينو)' }, issuer: { en: 'Tuwaiq Academy', ar: 'أكاديمية طويق' }, date: '07/2025', image: '/certificates/Ardunio_Tuwaiq.jpg' },
   { title: { en: 'Virtual Work Experience — Data Analytics', ar: 'تجربة عمل افتراضية — تحليل البيانات' }, issuer: { en: 'Misk Skills × STC', ar: 'مسك المهارات × إس تي سي' }, date: '03/2025', image: '/certificates/STC_MISK_DA.jpg' },
-  { title: { en: 'Design Thinking in Business: Building Promising Ventures', ar: 'التفكير التصميمي في الأعمال: بناء مشاريع واعدة' }, issuer: { en: 'Tuwaiq Academy', ar: 'أكاديمية طويق' }, date: '08/2025' },
+  { title: { en: 'Design Thinking in Business: Building Promising Ventures', ar: 'التفكير التصميمي في الأعمال: بناء مشاريع واعدة' }, issuer: { en: 'Tuwaiq Academy', ar: 'أكاديمية طويق' }, date: '08/2025', image: '/certificates/Design_Thinking_in_Business.jpg' },
   { title: { en: 'Data Science Foundations', ar: 'أساسيات علوم البيانات' }, issuer: { en: 'IBM', ar: 'آي بي إم' }, date: '07/2024' },
   { title: { en: 'Data Fundamentals', ar: 'أساسيات البيانات' }, issuer: { en: 'IBM', ar: 'آي بي إم' }, date: '05/2024' },
   { title: { en: 'Advanced Excel', ar: 'إكسل المتقدم' }, issuer: { en: 'King Saud University', ar: 'جامعة الملك سعود' }, date: '02/2022' },
