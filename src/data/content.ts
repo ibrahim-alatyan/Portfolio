@@ -229,7 +229,7 @@ export const projects: Project[] = [
     id: 'smartlist',
     order: 7,
     year: '2025',
-    image: '/projects/smartlist-v4.png',
+    image: '/projects/smartlist-real.jpg',
     title: { en: 'SmartList', ar: 'سمارت ليست' },
     description: {
       en: 'An AI task and goal-management tool built with Streamlit and Google Gemini AI during the SDAIA bootcamp.',
