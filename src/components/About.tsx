@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useSite } from '../context/SiteContext';
 import { profile, education, bootcamp } from '../data/content';
 import { asset } from '../lib/asset';
-import { GraduationCap, Sparkles } from 'lucide-react';
+import { GraduationCap, BrainCircuit } from 'lucide-react';
 
 export default function About() {
   const { lang, t } = useSite();
@@ -81,7 +81,7 @@ export default function About() {
             className="rounded-2xl border border-ink-900/10 dark:border-paper-100/10 bg-paper-100/50 dark:bg-ink-900/50 p-6 flex items-start gap-4 mt-4"
           >
             <div className="p-2.5 rounded-xl bg-teal-500/15 text-teal-600 dark:text-teal-400">
-              <Sparkles size={20} />
+              <BrainCircuit size={20} />
             </div>
             <div>
               <p className="font-display font-medium">{t(bootcamp.degree)}</p>

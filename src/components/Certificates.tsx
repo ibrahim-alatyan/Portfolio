@@ -96,30 +96,85 @@ export default function Certificates() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-ink-950/90 backdrop-blur-sm flex items-center justify-center p-6"
+            className="fixed inset-0 z-[100] bg-ink-950/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8"
             onClick={close}
           >
-            <button onClick={close} className="absolute top-5 end-5 text-paper-50 p-2 rounded-full hover:bg-paper-50/10 focus-ring">
-              <X size={22} />
-            </button>
             <button
               onClick={(e) => { e.stopPropagation(); prev(); }}
-              className="absolute start-4 text-paper-50 p-2 rounded-full hover:bg-paper-50/10 focus-ring"
+              className="hidden sm:flex absolute start-4 text-paper-50 p-2 rounded-full hover:bg-paper-50/10 focus-ring"
             >
               <ChevronLeft size={24} />
             </button>
-            <motion.img
+
+            <motion.div
               key={lightboxIdx}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              src={asset(withImages[lightboxIdx].image!)}
-              alt={t(withImages[lightboxIdx].title)}
+              initial={{ opacity: 0, y: 16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.98 }}
               onClick={(e) => e.stopPropagation()}
-              className="max-h-[85vh] max-w-[90vw] rounded-lg shadow-2xl object-contain"
-            />
+              className="w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl bg-paper-50 dark:bg-ink-900 border border-ink-900/10 dark:border-paper-100/10 shadow-2xl"
+            >
+              <div className="relative p-3 bg-ink-950">
+                <img
+                  src={asset(withImages[lightboxIdx].image!)}
+                  alt={t(withImages[lightboxIdx].title)}
+                  className="w-full rounded-lg border border-paper-100/10 object-contain max-h-[50vh] mx-auto"
+                />
+                <button
+                  onClick={close}
+                  className="absolute top-5 end-5 w-8 h-8 flex items-center justify-center rounded-full bg-ink-950/70 text-paper-50 hover:bg-ink-950/90 focus-ring"
+                  aria-label="Close"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+
+              <a
+                href={asset(withImages[lightboxIdx].image!)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-3 text-xs font-medium text-ink-700/80 dark:text-paper-300/80 bg-paper-100/60 dark:bg-ink-950/40 border-b border-ink-900/10 dark:border-paper-100/10 hover:text-gold-600 dark:hover:text-gold-400 transition-colors"
+              >
+                <ExternalLink size={13} />
+                {lang === 'ar' ? 'فتح الصورة بتبويب جديد' : 'Open image in new tab'}
+              </a>
+
+              <div className="p-6">
+                {withImages[lightboxIdx].featured && (
+                  <p className="flex items-center gap-1 text-[10.5px] font-display font-medium tracking-[0.15em] uppercase text-gold-600 dark:text-gold-400 mb-2">
+                    <Star size={11} fill="currentColor" /> {lang === 'ar' ? 'شهادة مميزة' : 'Featured certificate'}
+                  </p>
+                )}
+                <h3 className="font-display font-semibold text-lg mb-4">{t(withImages[lightboxIdx].title)}</h3>
+
+                <div className="divide-y divide-ink-900/10 dark:divide-paper-100/10 border-t border-b border-ink-900/10 dark:border-paper-100/10">
+                  <div className="flex items-center justify-between py-2.5">
+                    <span className="text-[11px] uppercase tracking-wider text-ink-600/70 dark:text-paper-400/80">
+                      {lang === 'ar' ? 'الجهة المانحة' : 'Issuer'}
+                    </span>
+                    <span className="text-sm font-medium">{t(withImages[lightboxIdx].issuer)}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2.5">
+                    <span className="text-[11px] uppercase tracking-wider text-ink-600/70 dark:text-paper-400/80">
+                      {lang === 'ar' ? 'السنة' : 'Year'}
+                    </span>
+                    <span className="text-sm font-medium">{withImages[lightboxIdx].date}</span>
+                  </div>
+                  {withImages[lightboxIdx].credentialId && (
+                    <div className="flex items-center justify-between py-2.5 gap-3">
+                      <span className="text-[11px] uppercase tracking-wider text-ink-600/70 dark:text-paper-400/80 shrink-0">
+                        {lang === 'ar' ? 'رقم الاعتماد' : 'Credential ID'}
+                      </span>
+                      <span className="text-xs font-mono text-end break-all">{withImages[lightboxIdx].credentialId}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+
             <button
               onClick={(e) => { e.stopPropagation(); next(); }}
-              className="absolute end-4 text-paper-50 p-2 rounded-full hover:bg-paper-50/10 focus-ring"
+              className="hidden sm:flex absolute end-4 text-paper-50 p-2 rounded-full hover:bg-paper-50/10 focus-ring"
             >
               <ChevronRight size={24} />
             </button>

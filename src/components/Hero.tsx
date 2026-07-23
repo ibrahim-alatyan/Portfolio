@@ -12,12 +12,6 @@ export default function Hero() {
   return (
     <section id="top" className="relative min-h-screen flex items-center overflow-hidden pt-16">
       <ParticleField />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 overflow-hidden pointer-events-none select-none opacity-[0.05] dark:opacity-[0.07] font-mono text-[13px] leading-[1.9] tracking-[0.3em] text-ink-900 dark:text-paper-100 whitespace-pre-wrap break-all p-4"
-      >
-        {Array.from({ length: 40 }).map((_, i) => (i % 2 === 0 ? '01 ' : '10 ')).join('').repeat(20)}
-      </div>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-paper-50/0 to-paper-50 dark:to-ink-950 pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-8 py-20 w-full">

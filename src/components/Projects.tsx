@@ -22,7 +22,7 @@ export default function Projects() {
   const [active, setActive] = useState<string>('all');
   const [selected, setSelected] = useState<Project | null>(null);
 
-  const allProjects: Project[] = [...projects, ...confidentialProjects];
+  const allProjects: Project[] = [...projects, ...confidentialProjects].sort((a, b) => a.order - b.order);
 
   const filtered = useMemo(() => {
     if (active === 'all') return allProjects;
